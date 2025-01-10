@@ -1,6 +1,10 @@
 # FAQ Section Implementation
 
-This repository contains the implementation of a responsive and interactive FAQ section, developed as part of a test assignment for Kryptonum. The design is based on a layout provided in Figma, ensuring precise adherence to the visual specifications. It emphasizes high-quality code, attention to detail, and adherence to best practices in web development.
+This repository contains the implementation of a responsive and interactive FAQ section,
+developed as part of a test assignment for Kryptonum.
+The design is based on a layout provided in Figma, ensuring precise adherence to the visual specifications.
+It emphasizes high-quality code, attention to detail, and adherence to best practices in web development.
+Overall, it took about 12–14h to make everything work as expected, since I didn't really work with Astro before.
 
 ## 🚀 Features
 - Dynamic FAQ Section: Expanding and collapsing FAQ items with smooth animations for both opening and closing.
