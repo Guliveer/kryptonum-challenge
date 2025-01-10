@@ -117,11 +117,12 @@ const { question, answer } = Astro.props;
         width: 100%;
     }
 
-    .faq-item-label {
-        display: inline-block;
-        vertical-align: top;
-        font-style: normal;
+    .faq-item-content > * {
         line-height: 200%;
+    }
+
+    .faq-item-label {
+        font-style: normal;
 
         grid-area: faq-item-label;
 
