@@ -278,10 +278,6 @@ const { faq } = Astro.props;
         animateNumber(markerCount, visibleFaqItems, 450, 500);
     });
 
-    console.log('MarkerBox offsetWidth:', markerBox.offsetWidth);
-    console.log('Parent offsetWidth:', markerBox.parentElement.offsetWidth);
-    console.log('Offset factor:', offsetFactor);
-
     window.addEventListener('resize', () => {
         markerBox.style.maxWidth = `${marker.offsetWidth * 2}px`;
         offsetFactor = markerBox.parentElement.offsetWidth / markerBox.offsetWidth * 100;
