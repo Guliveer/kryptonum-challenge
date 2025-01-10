@@ -263,7 +263,8 @@ const { faq } = Astro.props;
     const markerTotal = document.querySelector('.marker-total');
     const progressBar = document.querySelector('.progress-bar');
 
-    let offsetFactor = 1;
+    let offsetFactor = 1; // Init marker box offset factor
+    progressBar.style.transform = `scaleX(0)`; // Init progress bar width
 
     window.addEventListener('load', () => { // Wait for the page to load
         markerBox.style.maxWidth = `${marker.offsetWidth * 2}px`; // Set the marker box width to the marker width
