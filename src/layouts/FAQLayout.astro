@@ -263,15 +263,30 @@ const { faq } = Astro.props;
     const markerTotal = document.querySelector('.marker-total');
     const progressBar = document.querySelector('.progress-bar');
 
-    markerBox.style.maxWidth = `${marker.offsetWidth * 2}px`; // Set the marker box width to the marker width
-    let offsetFactor = markerBox.parentElement.offsetWidth / markerBox.offsetWidth * 100;
+    let offsetFactor = 1;
 
-    markerBox.style.left = `-${markerBox.offsetWidth / 2}px`; // Center the marker box to the end of progress bar
-    markerBox.style.transform = `translateX(${(visibleFaqItems / allFaqItems) * offsetFactor }%)`; // Initial marker position
-    progressBar.style.transform = `scaleX(${visibleFaqItems / allFaqItems})`; // Initial progress bar width
+    window.addEventListener('load', () => { // Wait for the page to load
+        markerBox.style.maxWidth = `${marker.offsetWidth * 2}px`; // Set the marker box width to the marker width
+        offsetFactor = markerBox.parentElement.offsetWidth / markerBox.offsetWidth * 100;
 
-    // Initial marker count
-    animateNumber(markerCount, visibleFaqItems, 450, 500);
+        markerBox.style.left = `-${markerBox.offsetWidth / 2}px`; // Center the marker box to the end of progress bar
+        markerBox.style.transform = `translateX(${(visibleFaqItems / allFaqItems) * offsetFactor }%)`; // Initial marker position
+        progressBar.style.transform = `scaleX(${visibleFaqItems / allFaqItems})`; // Initial progress bar width
+
+        // Initial marker count
+        animateNumber(markerCount, visibleFaqItems, 450, 500);
+    });
+
+    console.log('MarkerBox offsetWidth:', markerBox.offsetWidth);
+    console.log('Parent offsetWidth:', markerBox.parentElement.offsetWidth);
+    console.log('Offset factor:', offsetFactor);
+
+    window.addEventListener('resize', () => {
+        markerBox.style.maxWidth = `${marker.offsetWidth * 2}px`;
+        offsetFactor = markerBox.parentElement.offsetWidth / markerBox.offsetWidth * 100;
+        markerBox.style.left = `-${markerBox.offsetWidth / 2}px`;
+        markerBox.style.transform = `translateX(${(visibleFaqItems / allFaqItems) * offsetFactor}%)`;
+    });
 
     // Remove `.hidden` class from first 10 `.faq-item` elements
     document.querySelectorAll('.faq-item').forEach((faqItem, index) => {
