@@ -138,7 +138,8 @@ const { faq } = Astro.props;
         align-items: flex-start;
         align-content: center;
 
-        width: fit-content;
+        width: min-content;
+        max-width: fit-content;
         margin-top: 2rem;
     }
 
@@ -188,6 +189,8 @@ const { faq } = Astro.props;
         align-items: center;
         align-content: center;
         gap: 0.1rem;
+        width: min-content;
+        max-width: fit-content;
 
         text-wrap: nowrap;
         text-align: right;

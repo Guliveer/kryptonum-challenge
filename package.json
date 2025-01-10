@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/preact": "^4.0.1",
+    "@vercel/analytics": "^1.4.1",
     "astro": "^5.1.1"
   }
 }
