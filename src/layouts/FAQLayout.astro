@@ -1,5 +1,7 @@
 ---
 import FAQItem from "../components/FAQItem.astro";
+import { Image } from 'astro:assets';
+import arrowDown from '../assets/arrow-down.svg';
 const { faq } = Astro.props;
 ---
 <div class="faq-body">
@@ -27,7 +29,7 @@ const { faq } = Astro.props;
 
                     <button class="show-more">
                         <span>Wczytaj więcej</span>
-                        <img src="/src/assets/arrow-down.svg" alt="Strzałka w dół"/>
+                        <Image src={arrowDown} alt="Strzałka w dół" width="auto" height="auto"/>
                     </button>
                 </div>
             </div>
