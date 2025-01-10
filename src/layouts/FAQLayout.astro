@@ -189,8 +189,8 @@ const { faq } = Astro.props;
         align-items: center;
         align-content: center;
         gap: 0.1rem;
-        width: min-content;
-        max-width: fit-content;
+
+        width: auto;
 
         text-wrap: nowrap;
         text-align: right;
@@ -263,7 +263,7 @@ const { faq } = Astro.props;
     const markerTotal = document.querySelector('.marker-total');
     const progressBar = document.querySelector('.progress-bar');
 
-    markerBox.style.width = `${marker.offsetWidth * 2}px`; // Set the marker box width to the marker width
+    markerBox.style.maxWidth = `${marker.offsetWidth * 2}px`; // Set the marker box width to the marker width
     let offsetFactor = markerBox.parentElement.offsetWidth / markerBox.offsetWidth * 100;
 
     markerBox.style.left = `-${markerBox.offsetWidth / 2}px`; // Center the marker box to the end of progress bar
