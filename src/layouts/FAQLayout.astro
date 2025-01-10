@@ -1,0 +1,316 @@
+---
+import FAQItem from "../components/FAQItem.astro";
+const { faq } = Astro.props;
+---
+<div class="faq-body">
+    <div class="header">
+        <h2><strong>Pytaj</strong>, jakby jutra miało nie być. Odpowiemy!</h2>
+    </div>
+    <div class="main">
+        <section class="faq">
+            {faq.slice(0, faq.length).map((faq) => (
+                    <FAQItem question={faq.question} answer={faq.answer} />
+            ))}
+
+            <div class="load-more">
+                <div class="marker-box">
+                    <div class="marker">
+                        <span class="marker-count">0</span>
+                        <span class="marker-delim">/</span>
+                        <span class="marker-total">{faq.length}</span>
+                    </div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="progress-bar"></div>
+                    <div class="bar"></div>
+
+                    <button class="show-more">
+                        <span>Wczytaj więcej</span>
+                        <img src="/src/assets/arrow-down.svg" alt="Strzałka w dół"/>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+    /* mobiles */
+    @media (max-width: 425px) {
+        * {
+            font-size: 0.9rem;
+        }
+
+        .faq-body {
+            max-width: 90vw !important;
+            width: 100%;
+        }
+    }
+
+    /* tablets */
+    @media (min-width: 426px) and (max-width: 768px) {
+        .faq-body {
+            max-width: 80vw !important;
+            width: 100%;
+        }
+    }
+
+    .faq-body {
+        max-width: 65vw;
+        width: calc(100% - clamp(1rem,4.1vw,2rem) * 2);
+        margin: 0 auto;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+    }
+
+    .header {
+        color: var(--primary-color);
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: flex-start;
+        padding: 0;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+
+        --font-size: 1.5rem;
+    }
+
+    .header h2, .header h2 * {
+        height: fit-content;
+
+        font-style: normal !important;
+        font-size: var(--font-size);
+        line-height: 160%;
+        letter-spacing: -0.0225em;
+
+        color: white;
+    }
+
+    .header h2 strong {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    .header h2 strong:before {
+        content: url('/src/assets/header-icon.svg');
+        margin-right: 0.25em;
+    }
+
+    .faq {
+        counter-reset: faq-item;
+
+        font-size: 1rem;
+        width: 100%;
+        margin: 0 0 10rem;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+    }
+
+    .load-more {
+        --transition-data: 0.75s ease-in-out;
+        --progress-delay: 0.5s;
+
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        align-content: center;
+
+        width: fit-content;
+        margin-top: 2rem;
+    }
+
+    .load-more.hidden {
+        display: none;
+    }
+
+    .load-more .marker-box {
+        --marker-color: rgba(6, 64, 64, 0.75);
+        display: inline-flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        width: 100%;
+        position: relative;
+        text-align: right;
+        top: 0.2em;
+        //left: -1.62rem;
+
+        transform: translateX(0);
+        transition: transform var(--transition-data);
+        transition-delay: var(--progress-delay);
+    }
+
+    .load-more .marker-box:after {
+        /* little triangle at the bottom middle */
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border-left: 0.3rem solid transparent;
+        border-right: 0.3rem solid transparent;
+        border-top: 0.3rem solid var(--marker-color);
+        margin: 0 auto;
+        position: relative;
+        top: -0.4rem;
+    }
+
+    .load-more .marker-box .marker {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        gap: 0.1rem;
+
+        text-wrap: nowrap;
+        text-align: right;
+        border-radius: 20em;
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+        margin-bottom: 0.4rem;
+        background: var(--marker-color);
+    }
+
+    .load-more .progress-bar,
+    .load-more .bar {
+        --bar-height: 1px;
+        width: 100%;
+        height: var(--bar-height);
+        border-radius: 20em;
+        background: rgba(6, 64, 64, 1);
+    }
+
+    .load-more .progress-bar{
+        /* filled progress bar */
+        transform: scaleX(0);
+        background: var(--primary-gradient) !important;
+        transition: transform var(--transition-data);
+        transition-delay: var(--progress-delay);
+        transform-origin: left;
+
+        position: relative;
+        overflow: hidden;
+        top: var(--bar-height);
+    }
+
+    .show-more {
+        border: none;
+        color: white;
+        background: transparent;
+
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        text-wrap: nowrap;
+        gap: 0.75rem;
+
+        /*height: fit-content;*/
+        padding: 0 0.25rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        letter-spacing: 0.03em;
+        margin: 0.7rem auto;
+        text-align: center;
+    }
+
+    .show-more img {
+        width: fit-content;
+        height: auto;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<script>
+    let visibleFaqItems = 10;
+    let incrementFaqItems = 10;
+
+    const allFaqItems = document.querySelectorAll('.faq-item').length;
+    const markerBox = document.querySelector('.marker-box');
+    const marker = document.querySelector('.marker');
+    const markerCount = document.querySelector('.marker-count');
+    const markerTotal = document.querySelector('.marker-total');
+    const progressBar = document.querySelector('.progress-bar');
+
+    markerBox.style.width = `${marker.offsetWidth * 2}px`; // Set the marker box width to the marker width
+    let offsetFactor = markerBox.parentElement.offsetWidth / markerBox.offsetWidth * 100;
+
+    markerBox.style.left = `-${markerBox.offsetWidth / 2}px`; // Center the marker box to the end of progress bar
+    markerBox.style.transform = `translateX(${(visibleFaqItems / allFaqItems) * offsetFactor }%)`; // Initial marker position
+    progressBar.style.transform = `scaleX(${visibleFaqItems / allFaqItems})`; // Initial progress bar width
+
+    // Initial marker count
+    animateNumber(markerCount, visibleFaqItems, 450, 500);
+
+    // Remove `.hidden` class from first 10 `.faq-item` elements
+    document.querySelectorAll('.faq-item').forEach((faqItem, index) => {
+        if (index < visibleFaqItems) {
+            faqItem.classList.remove('hidden');
+        }
+    });
+
+    // 'Show more' button
+    document.querySelector('.show-more').addEventListener('click', () => {
+        // Increment visibleFaqItems counter
+        visibleFaqItems = Math.min(visibleFaqItems + incrementFaqItems, allFaqItems);
+
+        // Show more faq items
+        document.querySelectorAll('.faq-item').forEach((faqItem, index) => {
+            if (index < visibleFaqItems) {
+                faqItem.classList.remove('hidden');
+            }
+        });
+
+        markerBox.style.transform = `translateX(${(visibleFaqItems / allFaqItems) * offsetFactor }%)`; // Update marker position
+        progressBar.style.transform = `scaleX(${visibleFaqItems / allFaqItems})`; // Update progress bar width
+        animateNumber(markerCount, visibleFaqItems, 650, 500); // Update visible items count
+
+        // Hide the button if all faq items are visible
+        if (visibleFaqItems >= allFaqItems) {
+            //? (Un)comment the line below as necessary
+            // document.querySelector('.load-more').classList.add('hidden');
+        }
+    });
+
+    function animateNumber(elem, targetValue, duration_ms, delay_ms = 0) {
+        let counter = parseInt(elem.innerText) || 0;
+        let start = counter;
+
+        setTimeout(() => {
+            let interval = setInterval(() => {
+                if (counter - 1 < targetValue) {
+                    elem.innerText = counter;
+                    counter++;
+                } else {
+                    clearInterval(interval); // Stop the interval
+                }
+            }, duration_ms / (targetValue - start + 1));
+        }, delay_ms);
+    }
+</script>

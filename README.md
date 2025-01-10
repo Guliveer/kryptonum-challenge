@@ -1,48 +1,61 @@
-# Astro Starter Kit: Basics
+# FAQ Section Implementation
 
-```sh
-npm create astro@latest -- --template basics
+This repository contains the implementation of a responsive and interactive FAQ section, developed as part of a test assignment for Kryptonum. The design is based on a layout provided in Figma, ensuring precise adherence to the visual specifications. It emphasizes high-quality code, attention to detail, and adherence to best practices in web development.
+
+## 🚀 Features
+- Dynamic FAQ Section: Expanding and collapsing FAQ items with smooth animations for both opening and closing.
+- Progressive Loading: A "Load More" button dynamically loads additional FAQ items in batches.
+- Responsive Design: Fully responsive layout designed to work seamlessly on various devices.
+- Accessibility: Built-in support for aria-expanded attributes to enhance accessibility.
+
+## 🛠️ Tech Stack
+- Astro: For building a performant static website.
+- Vanilla JavaScript: Handles dynamic interactions and animations.
+- CSS: Custom styles for the FAQ section and its components.
+
+## ⚙️ How It Works
+1. FAQ Item Interaction:
+   - Clicking an FAQ item expands or collapses its content.
+   - Animations for both actions ensure a smooth user experience.
+2. Load More Functionality:
+   - Initially, only 10 FAQ items are displayed.
+   - Clicking “Load More” dynamically appends the next set of items.
+
+## 🔧 Setup Instructions
+### 1. Clone the repository:
+
+```bash
+git clone https://github.com/Guliveer/kryptonum-challenge.git
+cd kryptonum-challenge
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### 2. Install dependencies:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### 3. Run the development server:
 
-## 🧞 Commands
+```bash
+npm run dev
+```
 
-All commands are run from the root of the project, from a terminal:
+### 4. Build for production:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```bash
+npm run build
+```
 
-## 👀 Want to learn more?
+## 📝 Notes on the Assignment
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The implementation was guided by Kryptonum’s Engineering Wiki. The process included adhering to their best practices and replicating the provided FAQ design accurately.
+
+This project serves as a demonstration of:
+- Code quality.
+- Responsiveness and accessibility.
+- Timely delivery and attention to detail.
+
+---
+
+Thanks for the opportunity to showcase my skills! 😊

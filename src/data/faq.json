@@ -1,0 +1,98 @@
+[
+    {
+        "question": "Ile kosztuje utworzenie strony internetowej?",
+        "answer": "Quis neque malesuada in est diam. Turpis facilisis nibh imperdiet quam neque sed venenatis. Viverra elit pellentesque eget id senectus sit. Facilisi et vivamus sed ut purus nunc auctor ut."
+    },
+    {
+        "question": "Jakie formy rozliczenia oferujecie?",
+        "answer": "Oferujemy rozliczenie godzinowe lub za projekt, w zależności od potrzeb."
+    },
+    {
+        "question": "Ile czasu potrzebujecie na stworzenie strony?",
+        "answer": "Proces trwa od kilku tygodni do kilku miesięcy, zależnie od złożoności."
+    },
+    {
+        "question": "Jakich informacji potrzebujecie, by utworzyć mi stronę internetową?",
+        "answer": "Potrzebujemy informacji o firmie, logo, treści, zdjęcia, itp."
+    },
+    {
+        "question": "Po co mi strona internetowa?",
+        "answer": "Strona internetowa to wizytówka firmy w sieci, dzięki której możesz dotrzeć do nowych klientów."
+    },
+    {
+        "question": "Jak wygląda współpraca z Kryptonum?",
+        "answer": "Współpraca z nami to gwarancja profesjonalizmu, terminowości oraz wysokiej jakości usług."
+    },
+    {
+        "question": "Czy tworzycie logo?",
+        "answer": "Tak, tworzymy logo oraz identyfikację wizualną dla firm."
+    },
+    {
+        "question": "Jakie technologie wykorzystujecie?",
+        "answer": "Wykorzystujemy najnowsze technologie, takie jak HTML5, CSS3, JavaScript, React, Node.js, Astro, itp."
+    },
+    {
+        "question": "W jaki sposób mogę się z Wami skontaktować?",
+        "answer": "Możesz skontaktować się z nami poprzez formularz kontaktowy na stronie, mailowo lub telefonicznie."
+    },
+    {
+        "question": "Dlaczego warto wybrać Waszą firmę?",
+        "answer": "Jesteśmy doświadczoną firmą, która oferuje kompleksowe usługi z zakresu tworzenia stron internetowych."
+    },
+    {
+        "question": "Jak wygląda proces współpracy?",
+        "answer": "Proces współpracy składa się z kilku etapów: analiza, projektowanie, wdrożenie, testowanie, wsparcie."
+    },
+    {
+        "question": "Czy oferujecie usługi dla firm?",
+        "answer": "Tak, oferujemy usługi dla firm, instytucji oraz klientów indywidualnych."
+    },
+    {
+        "question": "Czy oferujecie usługi dla klientów zagranicznych?",
+        "answer": "Tak, oferujemy usługi dla klientów zagranicznych."
+    },
+    {
+        "question": "Lorem",
+        "answer": "Ipsum"
+    },
+    {
+        "question": "Dolor",
+        "answer": "Sit amet"
+    },
+    {
+        "question": "Consectetur",
+        "answer": "Adipiscing elit"
+    },
+    {
+        "question": "Sed do eiusmod",
+        "answer": "Tempor incididunt"
+    },
+    {
+        "question": "Ut labore et",
+        "answer": "Dolore magna aliqua"
+    },
+    {
+        "question": "Ut enim ad",
+        "answer": "Minim veniam"
+    },
+    {
+        "question": "Quis nostrud",
+        "answer": "Exercitation ullamco"
+    },
+    {
+        "question": "Laboris nisi",
+        "answer": "Ut aliquip ex"
+    },
+    {
+        "question": "Commodo consequat",
+        "answer": "Duis aute irure"
+    },
+    {
+        "question": "Dolor in reprehenderit",
+        "answer": "In voluptate velit"
+    },
+    {
+        "question": "Esse cillum",
+        "answer": "Dolore eu fugiat"
+    }
+]

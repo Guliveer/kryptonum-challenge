@@ -1,11 +1,23 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import FaqLayout from '../layouts/FAQLayout.astro';
+import FAQItem from '../components/FAQItem.astro';
+import faqArray from '../data/faq.json';
 ---
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/styles.css">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+        <link rel="apple-touch-icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+        <link rel="apple-touch-icon-precomposed" href="/favicon.svg" type="image/svg+xml" sizes="any">
+        <link rel="apple-touch-startup-image" href="/favicon.svg" type="image/svg+xml" sizes="any">
+        <meta name="theme-color" content="#2DD282">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FAQ</title>
+    </head>
 
-<Layout>
-	<Welcome />
-</Layout>
+    <body>
+        <FaqLayout faq={faqArray} />
+    </body>
+</html>
