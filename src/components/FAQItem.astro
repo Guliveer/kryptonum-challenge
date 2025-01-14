@@ -192,58 +192,82 @@ const { question, answer } = Astro.props;
 </style>
 
 <script>
-    document.querySelectorAll('.faq-item').forEach(faqItem => {
-        faqItem.addEventListener('click', function (e) {
+    const enableOpenCloseAnimations:boolean = true;
+
+    document.querySelectorAll('.faq-item').forEach((faqItem) => {
+        const faqItemText = faqItem.querySelector('.faq-item-text');
+        const summary = faqItem.querySelector('summary');
+        if (!faqItemText || !summary) return; // Sprawdzenie, czy elementy istnieją
+
+        faqItem.addEventListener('click', (event) => {
             // Sprawdzenie, czy kliknięto poza div.faq-item-text
-            if (!e.target.closest('.faq-item-text')) {
-                // Zwijanie wszystkich elementów
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem) {
-                        item.removeAttribute('open');
-                        item.setAttribute('aria-expanded', 'false');
+            if (!event.target.closest('.faq-item-text')) {
+                event.preventDefault(); // Blokowanie domyślnego działania <details>
+
+                const isOpen = faqItem.open;
+
+                // Zamknięcie innych elementów z animacją
+                document.querySelectorAll('.faq-item').forEach((item) => {
+                    if (item !== faqItem && item.open) {
+                        closeWithAnimation(item);
                     }
                 });
+
+                if (isOpen) {
+                    // Zamknięcie klikniętego elementu
+                    closeWithAnimation(faqItem);
+                } else {
+                    // Otwarcie klikniętego elementu
+                    openWithAnimation(faqItem);
+                }
             }
         });
     });
 
-    // Accordion's open/close animation
-    document.querySelectorAll('.faq-item').forEach((details) => {
+    // Funkcja do otwierania z animacją
+    function openWithAnimation(details) {
+        if (!enableOpenCloseAnimations) {
+            details.open = true;
+            return;
+        }
+
         const faqItemText = details.querySelector('.faq-item-text');
-        const summary = details.querySelector('summary');
-        if (!faqItemText || !summary) return;
+        if (!faqItemText) return;
 
-        details.addEventListener('click', (event) => {
-            event.preventDefault(); // Block default behavior
+        details.open = true; // Otwórz element <details>
+        faqItemText.style.height = '0px'; // Ustaw początkową wysokość
+        const targetHeight = faqItemText.scrollHeight + 'px'; // Docelowa wysokość
+        requestAnimationFrame(() => (faqItemText.style.height = targetHeight));
+        faqItemText.addEventListener(
+            'transitionend',
+            () => {
+                faqItemText.style.height = ''; // Zresetuj wysokość po zakończeniu animacji
+                details.setAttribute('aria-expanded', 'true'); // Aktualizuj atrybut aria
+            },
+            { once: true }
+        );
+    }
 
-            if (details.open) {
-                // Closing animation
-                faqItemText.style.height = `${faqItemText.scrollHeight}px`; // Set height to current height
-                requestAnimationFrame(() => (faqItemText.style.height = '0px')); // Smoothly animate height
-                faqItemText.addEventListener(
-                    'transitionend', // After the transition ends...
-                    () => {
-                        details.open = false; // Close the <details>
-                        faqItemText.style.height = ''; // Reset height after animation
-                        details.setAttribute('aria-expanded', 'false'); // Set aria-expanded to false
-                    },
-                    { once: true } // Remove listener after animation
-                );
-            } else {
-                // Opening animation
-                details.open = true; // Open the <details>
-                faqItemText.style.height = '0px'; // Set height to 0
-                const startHeight = faqItemText.scrollHeight + 'px'; // Set target height
-                requestAnimationFrame(() => (faqItemText.style.height = startHeight));
-                faqItemText.addEventListener(
-                    'transitionend', // After the transition ends...
-                    () => {
-                        faqItemText.style.height = ''; // Reset height after animation
-                        details.setAttribute('aria-expanded', 'true'); // Set aria-expanded to true
-                    },
-                    { once: true } // Remove listener after animation
-                );
-            }
-        });
-    });
+    // Funkcja do zamykania z animacją
+    function closeWithAnimation(details) {
+        if (!enableOpenCloseAnimations) {
+            details.open = false;
+            return;
+        }
+
+        const faqItemText = details.querySelector('.faq-item-text');
+        if (!faqItemText) return;
+
+        faqItemText.style.height = `${faqItemText.scrollHeight}px`; // Ustaw aktualną wysokość
+        requestAnimationFrame(() => (faqItemText.style.height = '0px')); // Animacja do 0
+        faqItemText.addEventListener(
+            'transitionend',
+            () => {
+                details.open = false; // Zamknij element <details> po animacji
+                faqItemText.style.height = ''; // Zresetuj wysokość
+                details.setAttribute('aria-expanded', 'false'); // Aktualizuj atrybut aria
+            },
+            { once: true }
+        );
+    }
 </script>
