@@ -2,7 +2,7 @@
 import FAQItem from "../components/FAQItem.astro";
 import { Image } from 'astro:assets';
 import arrowDown from '../assets/arrow-down.svg';
-const { faq } = Astro.props;
+import faq from '../data/faq.json';
 ---
 <div class="faq-body">
     <div class="header">
@@ -273,6 +273,8 @@ const { faq } = Astro.props;
     const markerTotal = document.querySelector('.marker-total');
     const progressBar = document.querySelector('.progress-bar');
 
+    checkProgressBar();
+
     let offsetFactor = 1; // Init marker box offset factor
     progressBar.style.transform = `scaleX(0)`; // Init progress bar width
 
@@ -304,6 +306,7 @@ const { faq } = Astro.props;
 
     // 'Show more' button
     document.querySelector('.show-more').addEventListener('click', () => {
+
         // Increment visibleFaqItems counter
         visibleFaqItems = Math.min(visibleFaqItems + incrementFaqItems, allFaqItems);
 
@@ -314,16 +317,19 @@ const { faq } = Astro.props;
             }
         });
 
+        checkProgressBar();
+
         markerBox.style.transform = `translateX(${(visibleFaqItems / allFaqItems) * offsetFactor }%)`; // Update marker position
         progressBar.style.transform = `scaleX(${visibleFaqItems / allFaqItems})`; // Update progress bar width
         animateNumber(markerCount, visibleFaqItems, 650, 500); // Update visible items count
-
-        // Hide the button if all faq items are visible
-        if (visibleFaqItems >= allFaqItems) {
-            //? (Un)comment the line below as necessary
-            // document.querySelector('.load-more').classList.add('hidden');
-        }
     });
+
+    // Hide progress bar if all faq items are visible
+    function checkProgressBar() {
+        if (visibleFaqItems >= allFaqItems) {
+            document.querySelector('.load-more').classList.add('hidden');
+        }
+    }
 
     function animateNumber(elem, targetValue, duration_ms, delay_ms = 0) {
         let counter = parseInt(elem.innerText) || 0;

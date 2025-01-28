@@ -3,7 +3,6 @@ const { question, answer } = Astro.props;
 ---
 <details class="faq-item hidden" aria-expanded="false">
     <summary class="faq-item-content">
-        <span class="faq-item-number"></span>
         <div class="faq-item-label">{question}</div>
         <div class="faq-item-toggle">
             <span class="toggle-vertical"></span>
@@ -12,7 +11,6 @@ const { question, answer } = Astro.props;
     </summary>
     <div class="faq-item-text">{answer}</div>
 </details>
-<div class="faq-item-border"></div>
 
 <style>
     /* mobiles */
@@ -25,7 +23,7 @@ const { question, answer } = Astro.props;
         }
 
         details.faq-item .faq-item-text {
-            max-width: 90% !important;
+            max-width: 18.5rem !important;
         }
 
         .faq-item-toggle {
@@ -66,35 +64,27 @@ const { question, answer } = Astro.props;
         padding: calc(var(--padding) * 1.15) var(--padding);
     }
 
-    details.faq-item.hidden,
-    details.faq-item.hidden + .faq-item-border,
-    details.faq-item.hidden + .faq-item-border:before {
-        display: none !important;
-    }
-
-    details.faq-item + .faq-item-border {
-        z-index: 0;
+    details.faq-item::before {
+        content: "";
+        background: linear-gradient(to right, #90F4E8 1.76%, #2DD282 49%, gray 51%);
+        background-size: 220% 100%;
+        background-position: 100% 50%;
+        width: 100%;
         height: 1px;
-        width: 100%;
-        background: gray;
-        opacity: 100%;
-        transition: background-color 0.2s ease;
-        transform-origin: left;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-repeat: no-repeat;
+        transition: 0.75s ease;
     }
 
-    details.faq-item + .faq-item-border:before{
-        z-index: 1;
-        content: '';
-        display: block;
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        position: relative;
-        background: var(--primary-gradient);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.75s ease;
+    details[open].faq-item::before {
+        background-size: 220% 100%;
+        background-position: 0% 50%;
+    }
+
+    details.faq-item.hidden {
+        display: none !important;
     }
 
     details:not([open]).faq-item:hover + .faq-item-border {
@@ -128,25 +118,29 @@ const { question, answer } = Astro.props;
         text-align: left;
     }
 
-    .faq-item-number {
+    .faq-item-label::before {
         grid-area: faq-item-number;
         text-wrap: nowrap;
         color: var(--secondary-color);
+
+        position: absolute;
+        left: 1rem;
     }
 
-    .faq-item-number:after {
+    .faq-item-label::before {
         content: counter(faq-item, decimal-leading-zero);
     }
 
     .faq-item-text {
         margin-top: var(--padding);
-        font-size: 0.88rem;
-        max-width: 50%;
-        line-height: 200%;
-        font-weight: 200;
+        font-size: 0.875rem;
+        max-width: 35.875rem;
+        line-height: 1.75;
+        font-weight: 400;
+        letter-spacing: 0.015em;
         margin-left: clamp( var(--grid-width-number), calc(3vw + 0.75rem), calc(80px + 0.75rem)); /* somehow works */
-        letter-spacing: 0.04em;
 
+        cursor: text;
         overflow: hidden;
         height: fit-content;
         transition: height 0.3s ease;

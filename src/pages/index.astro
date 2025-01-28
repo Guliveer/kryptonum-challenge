@@ -2,7 +2,6 @@
 import Analytics from '@vercel/analytics/astro'
 import FaqLayout from '../layouts/FAQLayout.astro';
 import FAQItem from '../components/FAQItem.astro';
-import faqArray from '../data/faq.json';
 ---
 <!DOCTYPE html>
 <html lang="pl">
@@ -20,6 +19,6 @@ import faqArray from '../data/faq.json';
     </head>
 
     <body>
-        <FaqLayout faq={faqArray} />
+        <FaqLayout />
     </body>
 </html>

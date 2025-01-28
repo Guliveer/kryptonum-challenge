@@ -76,6 +76,7 @@ table {
     font-weight: 300;
     text-rendering: optimizeLegibility;
     letter-spacing: 0.04em;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
