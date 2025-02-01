@@ -22,8 +22,12 @@ const { question, answer } = Astro.props;
             width: 100% !important;
         }
 
+        .faq-item-label::before {
+            left: 0 !important;
+        }
+
         details.faq-item .faq-item-text {
-            max-width: 18.5rem !important;
+            --target-width: 18.5rem !important;
         }
 
         .faq-item-toggle {
@@ -33,8 +37,12 @@ const { question, answer } = Astro.props;
 
     /* tablets */
     @media (min-width: 426px) and (max-width: 768px) {
+        details.faq-item {
+            --padding-v: 1.9375rem !important;
+        }
+
         details.faq-item .faq-item-text {
-            max-width: 50vw;
+            --target-width: 25rem !important;
         }
 
         .faq-item-content {
@@ -46,56 +54,48 @@ const { question, answer } = Astro.props;
         display: none !important; /* hides the default 'arrow' for expanding */
     }
 
-    details.faq-item,
-    summary {
-        cursor: pointer !important;
-    }
-
     details.faq-item {
-        --padding: 1.25rem;
+        --padding-h: 1.375rem;
+        --padding-v: 1.5rem;
         --grid-width-number: 5rem;
 
         counter-increment: faq-item;
         position: relative;
-        width: calc(100% - var(--padding) * 2);
+        width: calc(100%);
 
-        cursor: pointer;
-
-        padding: calc(var(--padding) * 1.15) var(--padding);
+        padding-top: var(--padding-v);
+        //padding-left: var(--padding-h);
+        //padding-right: var(--padding-h);
+        transition: padding 0.3s ease;
     }
 
-    details.faq-item::before {
+    details.faq-item::after {
+        z-index: 1;
         content: "";
-        background: linear-gradient(to right, #90F4E8 1.76%, #2DD282 49%, gray 51%);
-        background-size: 220% 100%;
-        background-position: 100% 50%;
-        width: 100%;
-        height: 1px;
+        background: linear-gradient(to right, gray 24%, #90F4E8 25%, #2DD282 75%, gray 76%);
+        background-size: 300% 100%;
+        background-position: 125% center;
+        width: calc(100% + var(--padding-h) * 0);
+        height: 1px !important;
         position: absolute;
         left: 0;
         bottom: 0;
-        background-repeat: no-repeat;
-        transition: 0.75s ease;
+        background-repeat: repeat;
+        transition: background 0.75s ease;
     }
 
-    details[open].faq-item::before {
-        background-size: 220% 100%;
-        background-position: 0% 50%;
+    details[aria-expanded="true"].faq-item::after,
+    details.faq-item:hover::after {
+        background-position: 50% 50%;
     }
 
     details.faq-item.hidden {
         display: none !important;
     }
 
-    details:not([open]).faq-item:hover + .faq-item-border {
-        background: rgba(128, 128, 128, 0.7);
-    }
-
-    details[open].faq-item + .faq-item-border:before {
-        transform: scaleX(1);
-    }
-
     .faq-item-content {
+        cursor: pointer !important;
+
         display: grid;
         grid-template-areas: 'faq-item-number faq-item-label faq-item-toggle';
 
@@ -106,12 +106,17 @@ const { question, answer } = Astro.props;
 
         width: 100%;
         line-height: 1.5;
+
+        padding-right: var(--padding-h);
+        padding-left: var(--padding-h);
+        margin-bottom: var(--padding-v);
     }
 
     .faq-item-label {
         font-style: normal;
 
         grid-area: faq-item-label;
+        width: calc(100% - 1.25rem - var(--padding-v) * 2);
 
         word-break: break-word;
         white-space: normal;
@@ -124,7 +129,7 @@ const { question, answer } = Astro.props;
         color: var(--secondary-color);
 
         position: absolute;
-        left: 1rem;
+        left: var(--padding-h);
     }
 
     .faq-item-label::before {
@@ -132,29 +137,39 @@ const { question, answer } = Astro.props;
     }
 
     .faq-item-text {
-        margin-top: var(--padding);
+        padding-bottom: 0;
+        padding-top: 0;
         font-size: 0.875rem;
-        max-width: 35.875rem;
+        --target-width: 35.875rem;
+        max-width: var(--target-width);
+        width: max-content;
         line-height: 1.75;
         font-weight: 400;
         letter-spacing: 0.015em;
-        margin-left: clamp( var(--grid-width-number), calc(3vw + 0.75rem), calc(80px + 0.75rem)); /* somehow works */
+        padding-left: clamp(var(--grid-width-number), calc(4.25vw + 0.75rem + var(--padding-v)), calc(80px + 0.75rem + var(--padding-v))); /* somehow works */
+        padding-right: calc(100% - clamp( var(--grid-width-number), calc(3vw + 0.75rem), calc(80px + 0.75rem)) - var(--target-width));
 
         cursor: text;
         overflow: hidden;
         height: fit-content;
-        transition: height 0.3s ease;
+        transition: height 0.3s ease, padding-bottom 0.3s ease, padding-top 0.3s ease;
+    }
+
+    details[aria-expanded="true"].faq-item .faq-item-text {
+        padding-bottom: var(--padding-v);
     }
 
     .faq-item-toggle {
         grid-area: faq-item-toggle;
 
-        --size: 20px;
+        --size: 1.25rem;
         height: var(--size);
         width: var(--size);
         min-height: var(--size);
         min-width: var(--size);
-        margin-left: 1.5rem;
+
+        position: relative;
+        right: calc(var(--padding-v) * 1.5);
 
         display: flex;
         justify-content: center;
@@ -180,7 +195,7 @@ const { question, answer } = Astro.props;
         transform: rotate(90deg);
     }
 
-    details[open].faq-item .faq-item-toggle .toggle-vertical {
+    details[aria-expanded="true"].faq-item .faq-item-toggle .toggle-vertical {
         transform: rotate(90deg);
     }
 </style>
@@ -218,6 +233,7 @@ const { question, answer } = Astro.props;
         });
     });
 
+
     // Funkcja do otwierania z animacją
     function openWithAnimation(details) {
         if (!enableOpenCloseAnimations) {
@@ -231,12 +247,13 @@ const { question, answer } = Astro.props;
         details.open = true; // Otwórz element <details>
         faqItemText.style.height = '0px'; // Ustaw początkową wysokość
         const targetHeight = faqItemText.scrollHeight + 'px'; // Docelowa wysokość
+        // ustaw height na targetHeight a scale (pion) na 1
+        details.setAttribute('aria-expanded', 'true'); // Aktualizuj atrybut aria
         requestAnimationFrame(() => (faqItemText.style.height = targetHeight));
         faqItemText.addEventListener(
             'transitionend',
             () => {
                 faqItemText.style.height = ''; // Zresetuj wysokość po zakończeniu animacji
-                details.setAttribute('aria-expanded', 'true'); // Aktualizuj atrybut aria
             },
             { once: true }
         );
@@ -252,14 +269,14 @@ const { question, answer } = Astro.props;
         const faqItemText = details.querySelector('.faq-item-text');
         if (!faqItemText) return;
 
-        faqItemText.style.height = `${faqItemText.scrollHeight}px`; // Ustaw aktualną wysokość
-        requestAnimationFrame(() => (faqItemText.style.height = '0px')); // Animacja do 0
+        faqItemText.style.height = `${faqItemText.scrollHeight * 0.5}px`; // Ustaw aktualną wysokość
+        requestAnimationFrame(() => (faqItemText.style.height = '0px'));
+        details.setAttribute('aria-expanded', 'false'); // Aktualizuj atrybut aria
         faqItemText.addEventListener(
             'transitionend',
             () => {
                 details.open = false; // Zamknij element <details> po animacji
                 faqItemText.style.height = ''; // Zresetuj wysokość
-                details.setAttribute('aria-expanded', 'false'); // Aktualizuj atrybut aria
             },
             { once: true }
         );

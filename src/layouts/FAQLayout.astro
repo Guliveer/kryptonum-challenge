@@ -14,7 +14,7 @@ import faq from '../data/faq.json';
                     <FAQItem question={faq.question} answer={faq.answer} />
             ))}
 
-            <div class="load-more">
+            <div class="load-more hidden">
                 <div class="marker-box">
                     <div class="marker">
                         <span class="marker-count">0</span>
@@ -45,7 +45,7 @@ import faq from '../data/faq.json';
         }
 
         .faq-body {
-            max-width: 90vw !important;
+            max-width: 91vw !important;
             width: 100%;
         }
     }
@@ -53,13 +53,13 @@ import faq from '../data/faq.json';
     /* tablets */
     @media (min-width: 426px) and (max-width: 768px) {
         .faq-body {
-            max-width: 80vw !important;
+            max-width: 79vw !important;
             width: 100%;
         }
     }
 
     .faq-body {
-        max-width: 65vw;
+        max-width: 80rem;
         width: calc(100% - clamp(1rem,4.1vw,2rem) * 2);
         margin: 0 auto;
     }
@@ -77,7 +77,7 @@ import faq from '../data/faq.json';
         color: var(--primary-color);
         display: inline-flex;
         flex-direction: row;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         justify-content: flex-start;
         align-items: center;
         align-content: flex-start;
@@ -263,8 +263,8 @@ import faq from '../data/faq.json';
 </style>
 
 <script>
-    let visibleFaqItems = 10;
-    let incrementFaqItems = 10;
+    let incrementFaqItems = 10; // Increase shown FAQ items when loading more by ...
+    let visibleFaqItems = 10; // Initial count of visible faq items
 
     const allFaqItems = document.querySelectorAll('.faq-item').length;
     const markerBox = document.querySelector('.marker-box');
@@ -328,6 +328,8 @@ import faq from '../data/faq.json';
     function checkProgressBar() {
         if (visibleFaqItems >= allFaqItems) {
             document.querySelector('.load-more').classList.add('hidden');
+        } else {
+            document.querySelector('.load-more').classList.remove('hidden');
         }
     }
 
