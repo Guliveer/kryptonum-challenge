@@ -4,7 +4,9 @@ This repository contains the implementation of a responsive and interactive FAQ 
 developed as part of a test assignment for Kryptonum.
 The design is based on a [layout provided in Figma](./design.pdf), ensuring precise adherence to the visual specifications.
 It emphasizes high-quality code, attention to detail, and adherence to best practices in web development.
-Overall, it took about 12–14h to make everything work as expected, since I didn't really work with Astro before.
+Overall, it took about 12–14h to make everything work as expected, since I didn't really work with Astro before.  
+Implementing suggested improvements and fixing mentioned problems in code-review took additionally approximately 2 hours.
+
 
 ## 🚀 Features
 
