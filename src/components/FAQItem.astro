@@ -3,11 +3,13 @@ const { question, answer } = Astro.props;
 ---
 <details class="faq-item hidden" aria-expanded="false">
     <summary class="faq-item-content">
-        <div class="faq-item-label">{question}</div>
-        <div class="faq-item-toggle">
+        <span class="faq-item-label">
+            {question}
+        </span>
+        <span class="faq-item-toggle">
             <span class="toggle-vertical"></span>
             <span class="toggle-horizontal"></span>
-        </div>
+        </span>
     </summary>
     <div class="faq-item-text">{answer}</div>
 </details>
@@ -54,16 +56,21 @@ const { question, answer } = Astro.props;
     details.faq-item {
         --padding-h: 1.375rem;
         --padding-v: 1.5rem;
-        --grid-width-number: 5rem;
+        --grid-width-number: 6.25rem;
 
         counter-increment: faq-item;
         position: relative;
         width: calc(100%);
 
-        padding-top: var(--padding-v);
-        //padding-left: var(--padding-h);
-        //padding-right: var(--padding-h);
+        pointer-events: none;
+
+        padding: 0;
+
         transition: padding 0.3s ease;
+    }
+
+    details[aria-expanded="true"].faq-item {
+        padding-bottom: var(--padding-v);
     }
 
     details.faq-item::after {
@@ -92,11 +99,12 @@ const { question, answer } = Astro.props;
 
     .faq-item-content {
         cursor: pointer !important;
+        pointer-events: auto;
 
         display: grid;
         grid-template-areas: 'faq-item-number faq-item-label faq-item-toggle';
 
-        grid-template-columns: var(--grid-width-number) 1fr auto;
+        grid-template-columns: var(--grid-width-number) 1fr 2.25em;
         grid-template-rows: auto;
 
         justify-self: stretch;
@@ -104,9 +112,8 @@ const { question, answer } = Astro.props;
         width: 100%;
         line-height: 1.5;
 
-        padding-right: var(--padding-h);
-        padding-left: var(--padding-h);
-        margin-bottom: var(--padding-v);
+        padding-top: var(--padding-v);
+        padding-bottom: var(--padding-v);
 
         transition: 0.3s margin-bottom linear;
     }
@@ -116,10 +123,7 @@ const { question, answer } = Astro.props;
     }
 
     .faq-item-label {
-        font-style: normal;
-
         grid-area: faq-item-label;
-        width: calc(100% - 1.25rem - var(--padding-v) * 2);
 
         word-break: break-word;
         white-space: normal;
@@ -149,8 +153,7 @@ const { question, answer } = Astro.props;
         line-height: 1.75;
         font-weight: 400;
         letter-spacing: 0.015em;
-        padding-left: calc(var(--grid-width-number) + var(--padding-h));
-        padding-right: calc(100% - (var(--grid-width-number) + var(--padding-h)) - var(--target-width));
+        margin-left: var(--grid-width-number);
 
         cursor: text;
         overflow: hidden;
@@ -158,22 +161,14 @@ const { question, answer } = Astro.props;
         transition: height 0.3s ease, padding-bottom 0.3s ease, padding-top 0.3s linear;
     }
 
-    details[aria-expanded="true"].faq-item .faq-item-text {
-        padding-bottom: var(--padding-v);
-        padding-top: var(--padding-v);
-    }
-
     .faq-item-toggle {
         grid-area: faq-item-toggle;
 
-        --size: 1.25rem;
+        --size: 1.5rem;
         height: var(--size);
         width: var(--size);
         min-height: var(--size);
         min-width: var(--size);
-
-        position: relative;
-        right: calc(var(--padding-v) * 1.5);
 
         display: flex;
         justify-content: center;
@@ -199,6 +194,9 @@ const { question, answer } = Astro.props;
         transform: rotate(90deg);
     }
 
+    details[aria-expanded="true"].faq-item .faq-item-toggle .toggle-horizontal {
+        transform: rotate(270deg);
+    }
     details[aria-expanded="true"].faq-item .faq-item-toggle .toggle-vertical {
         transform: rotate(90deg);
     }
